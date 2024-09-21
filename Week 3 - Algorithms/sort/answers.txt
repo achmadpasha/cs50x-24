@@ -1,0 +1,16 @@
+sort1 uses: Bubble Sort
+
+How do you know?: For sorted files, sort1 was the fastest in sorting them
+                  and it was the slowest sorting program in both a random
+                  number text file, as well as a reversed text file.
+
+sort2 uses: Merge Sort
+
+How do you know?: For a reversed and random files, it was exponentially
+                  faster compared to the other sorting programes.
+
+sort3 uses: Selection Sort
+
+How do you know?: For a sorted files, it was the slowest sorting program
+                  in sorted text file. Hence we can conclude that
+                  this is selection sort
