@@ -66,9 +66,3 @@ int main(int argc, char *argv[])
     fclose(card);
     fclose(img);
 }
-
-// TODO
-// Open memory card
-// Look for beginning of a JPEG
-// Open a new JPEG file
-// Write 512 bytes until a new JPEG is found
