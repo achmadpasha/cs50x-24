@@ -1,0 +1,69 @@
+1. Characterize the audio aura
+   To characterize a listener's audio aura using their top 100 songs,
+   I would analyze the average values of these attributes:
+
+   - Danceability
+     How suitable a track is for dancing, where higher values indicate a track is more danceable.
+   - Energy
+     The intensity and activity level of the track, where higher energy suggests a more dynamic sound.
+   - Valence
+     The mood conveyed by the track, where higher values mean the music sounds more positive or happy,
+     and lower values more sad or negative.
+   - Tempo
+     The speed (BPM) of the song, contributing to the pacing of the music.
+   - Loudness
+     Overall volume level, which could imply how "intense" or soft the songs are.
+
+   For each attribute, an average value is obtained. These values will give a quantitative sense
+   of the listener's musical habits, which can then be used to describe their "aura" in terms of:
+   - High energy/danceability/tempo: Could imply an energetic and outgoing personality.
+   - Low valence: A preference for darker or more emotional music.
+
+   Example:
+   - Danceability = 0.7 (highly danceable)
+   - Energy = 0.8 (high energy)
+   - Valence = 0.4 (darker or moody)
+   - Tempo = 120 BPM (moderate)
+   - Loudness = -5 dBFS (quite loud)
+
+   This could correspond to an aura of "Energetic yet Moody" or "High Energy but Dark."
+
+
+2. Hypothesize about why the way you’ve calculated this aura might not be very representative of the listener.
+   - Music variability
+     Averages might smooth out the natural variation in the listener’s preferences.
+     Someone might enjoy both upbeat dance tracks and melancholic ballads, but averaging
+     these together doesn’t capture the emotional diversity in their taste.
+
+   - Contextual Listening
+     People listen to different types of music based on mood, season, or activity (e.g., gym, studying),
+     so a single aura based on averages doesn't account for these shifts.
+
+   - Limited Range of Attributes
+     Energy, valence, and danceability only capture part of the musical experience.
+     Factors like genre, lyrics, and cultural context, which are deeply personal, aren’t considered.
+
+   Better Ways of Calculating the Aura:
+
+   - Clustering Music Preferences
+     Instead of averaging, you could cluster songs into categories based on their attributes
+     (e.g., energetic/danceable vs. mellow/low-energy). This would allow the aura to reflect
+     different "moods" or "vibes" within the listener’s playlist, giving a more nuanced picture.
+
+   - Weighting by Play Count
+     Give more weight to songs that the listener played more often. This would ensure that
+     their most frequently listened tracks have a stronger influence on the aura.
+
+   - Time-Segmented Aura
+     Create multiple auras based on different time periods (e.g., morning vs. night listening habits, or seasonal patterns).
+     This could show how the listener’s musical mood shifts over time.
+
+   - Incorporating Lyrics/Genre
+     If you had access to additional metadata like lyrical content or genre, you could build
+     a more comprehensive emotional profile that considers not only how the music sounds but also what it communicates.
+
+   - Dynamic Contextual Aura
+     Spotify could analyze the context in which the music was played (e.g., work, relaxation, party),
+     adapting the aura to these different contexts, rather than creating a single, averaged aura.
+
+   By improving the calculation, the aura would better reflect the diversity and richness of the listener’s musical experiences.
