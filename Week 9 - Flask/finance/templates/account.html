@@ -1,0 +1,153 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Account
+{% endblock %}
+
+{% block main %}
+    <div class="m-auto p-4 border rounded-4 bg-body-tertiary" style="width: 35vw;">
+        <table class="table table-borderless text-start">
+            <thead>
+                <tr>
+                    <th class="pb-4 bg-body-tertiary">
+                        <h4 class="fw-bold">My Account</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="p-3 bg-body-secondary d-flex justify-content-between align-items-center rounded-3">
+                        <div>
+                            <h6 class="fw-bold">Username</h6>
+                            <span>{{ name }}</span>
+                        </div>
+                        <a class="btn btn-primary px-3 py-2" data-bs-target="#ModalToggle-1" data-bs-toggle="modal" style="font-size: .8em;">Edit</a>
+                    <!-- Modal -->
+                        <div class="modal fade" id="ModalToggle-1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content" style="width: 85%;">
+                                    <div class="modal-header px-4 justify-content-center border-0">
+                                        <div class="w-auto mt-3">
+                                            <h1 class="fs-4 text-center fw-bold" id="exampleModalToggleLabel">Change your username</h1>
+                                            <h6 class="text-center fw-normal">Enter a new username and your existing password.</h6>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body px-4 pt-3 pb-4">
+                                        <form id="changeNameForm" action="/changeusername" method="post">
+                                            <div class="mb-4">
+                                                <h6 class=" fw-semibold" style="font-size: .8em;">NEW USERNAME</h6>
+                                                <input autocomplete="off" autofocus class="form-control" name="newusername" type="text">
+                                            </div>
+                                            <div>
+                                                <h6 class="fw-semibold" style="font-size: .8em;">CURRENT PASSWORD</h6>
+                                                <input class="form-control" name="password" type="password">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer px-4 bg-body-secondary border-0">
+                                        <button type="button" class="btn bg-transparent" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" id="submitNewName" class="btn btn-primary px-4">Done</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- Modal -->
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bg-body-tertiary">
+                        <div class="mt-4 mb-5">
+                            <div>
+                                <h6 class="fw-bold">Password</h6>
+                            </div>
+                            <a class="btn btn-primary px-3 py-2" data-bs-target="#ModalToggle-2" data-bs-toggle="modal" style="font-size: .8em;">Change Password</a>
+                        <!-- Modal -->
+                            <div class="modal fade" id="ModalToggle-2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content" style="width: 85%;">
+                                        <div class="modal-header px-4 justify-content-center border-0">
+                                            <div class="w-auto mt-3">
+                                                <h1 class="fs-4 text-center fw-bold" id="exampleModalToggleLabel">Update your password</h1>
+                                                <h6 class="text-center fw-normal">Enter your current password and a new password.</h6>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body px-4 pt-3 pb-4">
+                                            <form id="changePassForm" action="/changepassword" method="post">
+                                                <div class="mb-4">
+                                                    <h6 class=" fw-semibold" style="font-size: .8em;">CURRENT PASSWORD</h6>
+                                                    <input autocomplete="off" autofocus class="form-control" name="currentpassword" type="password">
+                                                </div>
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold" style="font-size: .8em;">NEW PASSWORD</h6>
+                                                    <input class="form-control" name="newpassword" type="password">
+                                                </div>
+                                                <div>
+                                                    <h6 class="fw-semibold" style="font-size: .8em;">CONFIRM NEW PASSWORD</h6>
+                                                    <input class="form-control" name="confirmpassword" type="password">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer px-4 bg-body-secondary border-0">
+                                            <button type="button" class="btn bg-transparent" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" id="submitNewPass" class="btn btn-primary px-4">Done</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- Modal -->
+                        </div>
+                        <div>
+                            <div>
+                                <h6 class="fw-bold">Account Removal</h6>
+                            </div>
+                            <a class="btn btn-danger px-3 py-2" data-bs-target="#ModalToggle-3" data-bs-toggle="modal" style="font-size: .8em;">Delete Account</a>
+                        <!-- Modal -->
+                            <div class="modal fade" id="ModalToggle-3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content" style="width: 85%;">
+                                        <div class="modal-header px-4 justify-content-center border-0">
+                                            <div class="w-auto mt-3">
+                                                <h1 class="fs-4 text-center fw-bold" id="exampleModalToggleLabel">Are you sure?</h1>
+                                                <h6 class="text-center fw-normal">Enter your password.</h6>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body px-4 pt-3 pb-4">
+                                            <form id="deleteAccForm" action="/deleteaccount" method="post">
+                                                <div>
+                                                    <h6 class="fw-semibold" style="font-size: .8em;">CURRENT PASSWORD</h6>
+                                                    <input class="form-control" name="password" type="password">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer px-4 bg-body-secondary border-0">
+                                            <button type="button" class="btn bg-transparent" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" id="submitDelete" class="btn btn-danger px-4">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- Modal -->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+    // submit new username
+        document.getElementById('submitNewName').addEventListener('click', function() {
+            document.getElementById('changeNameForm').submit(); // Programmatically submit the form
+        });
+
+    // submit new password
+        document.getElementById('submitNewPass').addEventListener('click', function() {
+            document.getElementById('changePassForm').submit(); // Programmatically submit the form
+        });
+
+    // submit delete account
+        document.getElementById('submitDelete').addEventListener('click', function() {
+            document.getElementById('deleteAccForm').submit(); // Programmatically submit the form
+        });
+    </script>
+{% endblock %}

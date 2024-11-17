@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <select class="form-select mx-auto w-auto" name="symbol">
+            <option disable selected>Symbol</option>
+            {% for porto in portfolio %}
+                <option value="{{ porto.symbol }}">{{ porto.symbol }}</option>
+            {% endfor %}
+        </select>
+        <div class="my-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="shares" placeholder="Shares" type="number">
+        </div>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="text-start">Symbol</th>
+                <th class="text-end">Shares</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">Transacted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for porto in portfolio %}
+                <tr>
+                    <td class="text-start">{{ porto.symbol }}</td>
+                    <td class="text-end">{{ porto.shares }}</td>
+                    <td class="text-end">{{ porto.price }}</td>
+                    <td class="text-end">{{ porto.time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

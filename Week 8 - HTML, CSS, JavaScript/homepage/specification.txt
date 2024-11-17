@@ -1,0 +1,24 @@
+Lists of 10 HTML tags and 5 CSS properties
+HTML Tags:
+1. <header>
+2. <nav>
+3. <main>
+4. <section>
+5. <div>
+6. <span>
+7. <figure>
+8. <figcaption>
+9. <img>
+10. <a>
+
+CSS properties:
+1. margin
+2. padding
+3. font-size
+4. display
+5. transition
+
+
+Description of JavaScript and Bootstrap.
+I use JavaScript to use the AOS library and typed js library for typed animations.
+While Bootstrap I use for some components such as modal and offcanvas. 
