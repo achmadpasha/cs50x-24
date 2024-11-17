@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- boxicons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- aos -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- flowbite -->
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+  <!-- css -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <title>WeatherIn</title>
+</head>
+<body>
+
+  <div class="container mx-auto px-5 relative font-poppins">
+
+    <!-- search & switch temperature -->
+    <section class="flex justify-between items-center md:justify-center py-5 md:py-6 z-50" data-aos="fade-down" data-aos-duration="1000">
+
+      <!-- search 1 -->
+      <div class="flex md:hidden">
+        <form class="location-form flex rounded-xl h-10" action="#">
+          <button id="btn-search" class="mr-3 md:hidden" type="button">
+            <label for="input-group-1" class="start-0 flex items-center pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon w-5 h-5 text-black" color="#000000" fill="none">
+                <path d="M17.5 17.5L22 22" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round" />
+              </svg>
+            </label>
+          </button>
+          <input class="get-location text-base block sm:w-fit w-36 h-full origin-left p-0 border-none focus:border-none focus:ring-0" autocomplete="off" autofocus type="text" name="location" placeholder="Search for a city">
+        </form>
+      </div>
+      <!-- search 2 -->
+      <div class="md-search w-80 h-10 border-2 border-black border-opacity-5 rounded-xl">
+        <form class="location-form-2 flex justify-between w-full h-full" action="#">
+          <label for="input-group-1" class="start-0 flex items-center ps-3.5 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-gray-500" color="#000000" fill="none">
+              <path d="M17.5 17.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+          </label>
+          <input id="input-group-1" class="get-location-2 text-base block w-full h-full ml-3 mr-4 p-0 border-none focus:ring-0" autocomplete="off" autofocus type="text" name="location" placeholder="Search for a city">
+        </form>
+      </div>
+      <!-- switch units temperature -->
+      <button class="switch-units block w-8 h-8 ml-4 text-2xl font-semibold cursor-pointer" type="button">°C</button>
+
+    </section>
+
+
+    <!-- current weather section -->
+    <section class="pt-24 flex flex-col">
+
+      <!-- main -->
+      <div class="flex justify-center items-center mb-10 h-80 cursor-default" data-aos="fade-down" data-aos-duration="1000">
+        <div class="flex items-center h-full">
+          <div class="">
+            <div class="flex justify-center items-center mx-auto h-14">
+              <!-- weather status -->
+              <div class="weather-icon"></div>
+              <div class="flex flex-col justify-center">
+                <h1 class="weather-status text-2xl lg:text-3xl font-semibold">Weather</h1>
+                <!-- datetime -->
+                <span class="inline datetime text-sm font-medium">Datetime</span>
+              </div>
+            </div>
+            <div class="flex flex-col items-center w-fit mx-auto mt-5">
+              <!-- temperature -->
+              <div class="flex items-start">
+                <span class="temperature text-8xl">0</span>
+                <span class="temp-units text-5xl font-medium">&#176</span>
+              </div>
+              <!-- location & timezone-->
+              <span class="location my-8 text-sm lg:text-base font-semibold">City | Timezone</span>
+              <!-- minmax temperature -->
+              <div class="minmax-temp text-sm font-semibold">minmax</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- today highlights -->
+      <div class="mt-16">
+        <div class="mx-auto">
+          <h2 class="text-lg font-semibold" data-aos="fade-right" data-aos-duration="1000">Today's Highlights</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-5">
+            <!-- feel -->
+            <div class="h-28 flex flex-col justify-between py-3 px-4 rounded-xl bg-white shadow-lg ring-2 ring-black ring-opacity-5" data-aos="fade-up" data-aos-duration="1000">
+              <div class="flex items-center">
+                <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                  <path d="M212,56a28,28,0,1,0,28,28A28,28,0,0,0,212,56Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,212,96Zm-84,57V88a8,8,0,0,0-16,0v65a32,32,0,1,0,16,0Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,120,200Zm40-66V48a40,40,0,0,0-80,0v86a64,64,0,1,0,80,0Zm-40,98a48,48,0,0,1-27.42-87.4A8,8,0,0,0,96,138V48a24,24,0,0,1,48,0v90a8,8,0,0,0,3.42,6.56A48,48,0,0,1,120,232Z"></path>
+                </svg>
+                <span class="text-sm font-medium">Feels like</span>
+              </div>
+              <div class="text-end font-medium">
+                <span class="feel text-3xl">__</span>
+              </div>
+            </div>
+            <!-- air quality -->
+            <div class="h-28 flex flex-col justify-between py-3 px-4 rounded-xl bg-white shadow-lg ring-2 ring-black ring-opacity-5" data-aos="fade-up" data-aos-duration="1000">
+              <div class="flex items-center">
+                <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                  <path d="M750-614q-27 27-62 41t-70 14q-35 0-69-13.5T488-614l-75-75q-15-15-34-22.5t-39-7.5q-20 0-39 7.5T267-689l-75 75-57-57 75-75q27-27 61-40.5t69-13.5q35 0 68.5 13.5T469-746l75 75q16 16 35 23.5t39 7.5q20 0 39.5-7.5T693-671l75-75 57 57-75 75Zm0 200q-27 27-61.5 40.5T619-360q-35 0-69.5-13.5T488-414l-75-75q-15-15-34-22.5t-39-7.5q-20 0-39 7.5T267-489l-75 75-57-56 75-76q27-27 61-40.5t69-13.5q35 0 68.5 13.5T469-546l75 75q16 16 35 23.5t39 7.5q20 0 39.5-7.5T693-471l75-75 57 57-75 75Zm-1 200q-27 27-61 40.5T619-160q-35 0-69.5-13.5T488-214l-76-75q-15-15-34-22.5t-39-7.5q-20 0-39 7.5T266-289l-75 75-56-56 75-76q27-27 61-40.5t69-13.5q35 0 68.5 13.5T469-346l75 75q16 16 35.5 23.5T619-240q20 0 39-7.5t35-23.5l75-75 56 57-75 75Z"/>
+                </svg>
+                <span class="text-sm font-medium">Air Quality</span>
+              </div>
+              <div class="air-quality text-end font-medium">__</div>
+            </div>
+            <!-- humidity -->
+            <div class="h-28 flex flex-col justify-between py-3 px-4 rounded-xl bg-white shadow-lg ring-2 ring-black ring-opacity-5" data-aos="fade-up" data-aos-duration="1000">
+              <div class="flex items-center">
+                <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" color="#000000" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/humidity-solid-standard.svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
+                  <path class="fill-black" fill="black" fill-rule="evenodd" clip-rule="evenodd" d="M13.041 1.47417C12.4047 1.05809 11.5954 1.05809 10.959 1.47417C10.0182 2.08934 7.93805 3.55333 6.08235 5.59801C4.2436 7.624 2.5 10.3583 2.5 13.5003C2.5 18.747 6.75329 23.0003 12 23.0003C17.2467 23.0003 21.5 18.747 21.5 13.5003C21.5 10.3583 19.7564 7.624 17.9177 5.59801C16.0619 3.55333 13.9818 2.08934 13.041 1.47417ZM7.56334 6.94213C9.22344 5.11298 11.1036 3.77343 12 3.18321C12.8964 3.77343 14.7766 5.11298 16.4367 6.94213C18.1475 8.8272 19.5 11.0944 19.5 13.5003C19.5 13.519 19.4999 13.5378 19.4998 13.5565C18.1831 14.2685 15.5835 14.8633 12.3517 13.048C9.28626 11.3261 6.63436 11.0837 4.85285 11.3332C5.36315 9.73988 6.3771 8.24916 7.56334 6.94213Z"></path>
+                </svg>
+                <span class="text-sm font-medium">Humidity</span>
+              </div>
+              <div class="text-end font-medium">
+                <span class="humidity text-3xl">__</span>
+              </div>
+            </div>
+            <!-- wind speed -->
+            <div class="h-28 flex flex-col justify-between py-3 px-4 rounded-xl bg-white shadow-lg ring-2 ring-black ring-opacity-5" data-aos="fade-up" data-aos-duration="1000">
+              <div class="flex items-center">
+                <svg class="w-7 h-7 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                  <path d="M184,184a32,32,0,0,1-32,32c-13.7,0-26.95-8.93-31.5-21.22a8,8,0,0,1,15-5.56C137.74,195.27,145,200,152,200a16,16,0,0,0,0-32H40a8,8,0,0,1,0-16H152A32,32,0,0,1,184,184Zm-64-80a32,32,0,0,0,0-64c-13.7,0-26.95,8.93-31.5,21.22a8,8,0,0,0,15,5.56C105.74,60.73,113,56,120,56a16,16,0,0,1,0,32H24a8,8,0,0,0,0,16Zm88-32c-13.7,0-26.95,8.93-31.5,21.22a8,8,0,0,0,15,5.56C193.74,92.73,201,88,208,88a16,16,0,0,1,0,32H32a8,8,0,0,0,0,16H208a32,32,0,0,0,0-64Z"></path>
+                </svg>
+                <span class="text-sm font-medium">Wind Speed</span>
+              </div>
+              <div class="text-end font-medium">
+                <span class="wind-speed text-xl lg:text-2xl">__</span>
+              </div>
+            </div>
+            <!-- pressure -->
+            <div class="h-28 flex flex-col justify-between py-3 px-4 rounded-xl bg-white shadow-lg ring-2 ring-black ring-opacity-5" data-aos="fade-up" data-aos-duration="1000">
+              <div class="flex items-center">
+                <svg class="w-6 h-6 mr-3 stroke-black" stroke="black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-gauge">
+                  <path d="M15.6 2.7a10 10 0 1 0 5.7 5.7"/>
+                  <circle cx="12" cy="12" r="2"/>
+                  <path d="M13.4 10.6 19 5"/>
+                </svg>
+                <span class="text-sm font-medium">Pressure</span>
+              </div>
+              <div class="text-end font-medium">
+                <span class="pressure text-xl lg:text-2xl xl:text-3xl">__</span>
+              </div>
+            </div>
+            <!-- clouds -->
+            <div class="h-28 flex flex-col justify-between py-3 px-4 rounded-xl bg-white shadow-lg ring-2 ring-black ring-opacity-5" data-aos="fade-up" data-aos-duration="1000">
+              <div class="flex items-center">
+                <svg class="w-7 h-7 mr-3" xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 256 256">
+                  <path d="M160,40A88.09,88.09,0,0,0,81.29,88.67,64,64,0,1,0,72,216h88a88,88,0,0,0,0-176Zm0,160H72a48,48,0,0,1,0-96c1.1,0,2.2,0,3.29.11A88,88,0,0,0,72,128a8,8,0,0,0,16,0,72,72,0,1,1,72,72Z"></path>
+                </svg>
+                <span class="text-sm font-medium">Clouds</span>
+              </div>
+              <div class="text-end font-medium">
+                <span class="clouds text-3xl">__</span>
+              </div>
+            </div>
+            <!-- sunrise sunset -->
+            <div class="col-span-2 md:col-span-2 rounded-xl bg-white shadow-lg ring-2 ring-black ring-opacity-5" data-aos="fade-up" data-aos-duration="1000">
+              <div class="h-28 flex flex-col justify-between py-3 px-4">
+                <div class="flex justify-between">
+                  <div class="flex items-center">
+                    <svg class="w-7 h-7 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M9.5 6.5C9.99153 5.9943 11.2998 4 12 4M14.5 6.5C14.0085 5.9943 12.7002 4 12 4M12 4V10"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M18.3633 10.6357L16.9491 12.05"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M3 17H5"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M5.63657 10.6356L7.05078 12.0498"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M21 17H19"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M21 20H3"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M16 17C16 14.7909 14.2091 13 12 13C9.79086 13 8 14.7909 8 17"/>
+                    </svg>
+                    <span class="text-sm font-medium">Sunrise</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-sm font-medium">Sunset</span>
+                    <svg class="w-7 h-7 ml-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M9.5 7.5C9.99153 8.0057 11.2998 10 12 10M14.5 7.5C14.0085 8.0057 12.7002 10 12 10M12 10V4"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M18.3633 10.6357L16.9491 12.05"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M3 17H5"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M5.63657 10.6356L7.05078 12.0498"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M21 17H19"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M21 20H3"/>
+                      <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M16 17C16 14.7909 14.2091 13 12 13C9.79086 13 8 14.7909 8 17"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <!-- sunrise time -->
+                  <div class="flex flex-col font-medium">
+                    <span class="sunrise-time text-xl lg:text-2xl xl:text-3xl">__</span>
+                  </div>
+                  <div class="">
+                    <i class="bx1 bx bx-chevrons-right bx-sm bx-fade-right"></i>
+                    <i class="bx2 hidden xl:inline-block bx bx-chevrons-right bx-sm bx-fade-right"></i>
+                    <i class="bx2 hidden xl:inline-block bx bx-chevrons-right bx-sm bx-fade-right"></i>
+                  </div>
+                  <!-- sunset time -->
+                  <div class="flex flex-col font-medium">
+                    <span class="sunset-time text-end text-xl lg:text-2xl xl:text-3xl">__</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="mt-20 lg:grid lg:grid-cols-2 lg:gap-10 next">
+
+      <!-- next 48 hours section -->
+      <section class="next-24-h" data-aos="fade-left" data-aos-duration="1000">
+        <h2 class="text-lg font-semibold">Next 48 Hours</h2>
+        <div class="lg:flex lg:items-center lg:px-3 mt-5 lg:rounded-xl lg:bg-white lg:shadow-xl lg:ring-2 lg:ring-black lg:ring-opacity-5 next24-container">
+
+          <div class="overflow-x-scroll scroll-custom" style="height: 220px;">
+            <div class="flex items-center justify-between h-full text-sm cursor-default" style="width: 1750px;">
+              <!-- 1 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-1">__</span>
+                <div class="next-48-icon-1"></div>
+                <span class="next-48-temp-1 text-lg font-medium">__</span>
+              </div>
+              <!-- 2 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-2">__</span>
+                <div class="next-48-icon-2"></div>
+                <span class="next-48-temp-2 text-lg font-medium">__</span>
+              </div>
+              <!-- 3 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-3">__</span>
+                <div class="next-48-icon-3"></div>
+                <span class="next-48-temp-3 text-lg font-medium">__</span>
+              </div>
+              <!-- 4 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-4">__</span>
+                <div class="next-48-icon-4"></div>
+                <span class="next-48-temp-4 text-lg font-medium">__</span>
+              </div>
+              <!-- 5 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-5">__</span>
+                <div class="next-48-icon-5"></div>
+                <span class="next-48-temp-5 text-lg font-medium">__</span>
+              </div>
+              <!-- 6 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-6">__</span>
+                <div class="next-48-icon-6"></div>
+                <span class="next-48-temp-6 text-lg font-medium">__</span>
+              </div>
+              <!-- 7 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-7">__</span>
+                <div class="next-48-icon-7"></div>
+                <span class="next-48-temp-7 text-lg font-medium">__</span>
+              </div>
+              <!-- 8 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-8">__</span>
+                <div class="next-48-icon-8"></div>
+                <span class="next-48-temp-8 text-lg font-medium">__</span>
+              </div>
+              <!-- 9 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-9">__</span>
+                <div class="next-48-icon-9"></div>
+                <span class="next-48-temp-9 text-lg font-medium">__</span>
+              </div>
+              <!-- 10 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-10">__</span>
+                <div class="next-48-icon-10"></div>
+                <span class="next-48-temp-10 text-lg font-medium">__</span>
+              </div>
+              <!-- 11 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-11">__</span>
+                <div class="next-48-icon-11"></div>
+                <span class="next-48-temp-11 text-lg font-medium">__</span>
+              </div>
+              <!-- 12 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-12">__</span>
+                <div class="next-48-icon-12"></div>
+                <span class="next-48-temp-12 text-lg font-medium">__</span>
+              </div>
+              <!-- 13 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-13">__</span>
+                <div class="next-48-icon-13"></div>
+                <span class="next-48-temp-13 text-lg font-medium">__</span>
+              </div>
+              <!-- 14 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-14">__</span>
+                <div class="next-48-icon-14"></div>
+                <span class="next-48-temp-14 text-lg font-medium">__</span>
+              </div>
+              <!-- 15 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-15">__</span>
+                <div class="next-48-icon-15"></div>
+                <span class="next-48-temp-15 text-lg font-medium">__</span>
+              </div>
+              <!-- 16 -->
+              <div class="flex flex-col items-center justify-between h-40 px-7 py-6 border-2 border-black border-opacity-5 rounded-full transition-all duration-500 ease-in-out hover:-translate-y-5 hover:bg-gray-100 next-24" style="width: 100px;">
+                <span class="next-48-time-16">__</span>
+                <div class="next-48-icon-16"></div>
+                <span class="next-48-temp-16 text-lg font-medium">__</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 days forecast section -->
+      <section class="next-5-day lg:mt-0 md:mt-20" data-aos="fade-right" data-aos-duration="1000">
+        <div class="">
+          <h2 class="text-lg font-semibold">Next 5 Days</h2>
+          <div class="mt-5 p-3 text-sm font-medium rounded-xl bg-white shadow-xl ring-2 ring-black ring-opacity-5">
+            <!-- day 1 -->
+            <div class="grid grid-cols-3 items-center px-2 py-3">
+              <span class="dt-day-1">__</span>
+              <div class="flex justify-between items-center h-7">
+                <div class="icon-day-1 justify-self-center self-center"></div>
+                <span class="temp-day-1">__</span>
+              </div>
+              <span class="stat-day-1 text-end">__</span>
+            </div>
+            <!-- day 2 -->
+            <div class="grid grid-cols-3 items-center px-2 py-3">
+              <span class="dt-day-2">__</span>
+              <div class="flex justify-between items-center h-7">
+                <div class="icon-day-2 justify-self-center self-center"></div>
+                <span class="temp-day-2">__</span>
+              </div>
+              <span class="stat-day-2 text-end">__</span>
+            </div>
+            <!-- day 3 -->
+            <div class="grid grid-cols-3 items-center px-2 py-3">
+              <span class="dt-day-3">__</span>
+              <div class="flex justify-between items-center h-7">
+                <div class="icon-day-3 justify-self-center self-center"></div>
+                <span class="temp-day-3">__</span>
+              </div>
+              <span class="stat-day-3 text-end">__</span>
+            </div>
+            <!-- day 4 -->
+            <div class="grid grid-cols-3 items-center px-2 py-3">
+              <span class="dt-day-4">__</span>
+              <div class="flex justify-between items-center h-7">
+                <div class="icon-day-4 justify-self-center self-center"></div>
+                <span class="temp-day-4">__</span>
+              </div>
+              <span class="stat-day-4 text-end">__</span>
+            </div>
+            <!-- day 5 -->
+            <div class="grid grid-cols-3 items-center px-2 py-3">
+              <span class="dt-day-5">__</span>
+              <div class="flex justify-between items-center h-7">
+                <div class="icon-day-5 justify-self-center self-center"></div>
+                <span class="temp-day-5">__</span>
+              </div>
+              <span class="stat-day-5 text-end">__</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+
+    <footer class="mt-20 p-3 flex justify-center font-bold">WeatherIn©2024.</footer>
+
+  </div>
+
+
+
+  <!-- flowbite -->
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+  <!-- aos -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
