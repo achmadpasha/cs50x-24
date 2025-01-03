@@ -1,8 +1,8 @@
 # Weather Forecast Web Application
 
-## Demo Video
+## Demo
 
-Watch the [**demo here**](https://youtu.be/Mn5C1E3GHKU).
+Visit the [**demo here**](https://achmadpasha.github.io/weatherin).
 
 ## Overview
 
